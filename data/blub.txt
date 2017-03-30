@@ -1,0 +1,5 @@
+power=1
+co2=3
+cost=344
+employee=1
+footprint=2
