@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = aQuartett
+title = pApp
 
 # (str) Package name
-package.name = aQuartett
+package.name = pApp
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,txt
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -49,7 +49,7 @@ requirements = kivy
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = %(source.dir)s/data/pap.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait
