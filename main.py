@@ -20,15 +20,15 @@ class ProgramX(App):
 
 		self.f = FloatLayout()
 
-		self.b1 = Button(text='', font_size=20, background_color=[0, 0, 0, 0.5], \
+		self.b1 = Button(text='', font_size=20, background_color=[0, 0, 0, 0], \
 				pos_hint={'center_x': 0.5, 'center_y': 0.485}, size_hint=(0.75,0.08))
-		self.b2 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0.5], \
+		self.b2 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0], \
 				pos_hint={'center_x': 0.5, 'center_y': 0.405}, size_hint=(0.75,0.08))
-		self.b3 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0.5], \
+		self.b3 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0], \
 				pos_hint={'center_x': 0.5, 'center_y': 0.325}, size_hint=(0.75,0.08))
-		self.b4 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0.5], \
+		self.b4 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0], \
 				pos_hint={'center_x': 0.5, 'center_y': 0.245}, size_hint=(0.75,0.08))
-		self.b5 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0.5], \
+		self.b5 = Button(text='', font_size=20,  background_color=[0, 0, 0, 0], \
 				pos_hint={'center_x': 0.5, 'center_y': 0.165}, size_hint=(0.75,0.08))
 
 		self.iCard = Image(source=self.userPics[0], allow_stretch=True, keep_ratio=False, \
@@ -106,34 +106,34 @@ class ProgramX(App):
 
 	def selectOption(self, instance):
 		if instance == self.b1:
-			if self.userData[0][0] >= self.computerData[0][0]:
+			if self.userData[0][0] >= self.computerData[0][0]:	# Power: Bigger = better
 				userWinsNow = 1
 			else:
 				userWinsNow = 0		
 		elif instance == self.b2:
-			if self.userData[0][1] >= self.computerData[0][1]:
+			if self.userData[0][1] <= self.computerData[0][1]: # C02: Smaller = better
 				userWinsNow = 1
 			else:
 				userWinsNow = 0		
 		elif instance == self.b3:
-			if self.userData[0][2] >= self.computerData[0][2]:
+			if self.userData[0][2] <= self.computerData[0][2]: # Cost: Smaller = better
 				userWinsNow = 1
 			else:
 				userWinsNow = 0		
 		elif instance == self.b4:
-			if self.userData[0][3] >= self.computerData[0][3]:
+			if self.userData[0][3] >= self.computerData[0][3]: # Employees: Bigger = better
 				userWinsNow = 1
 			else:
 				userWinsNow = 0		
 		elif instance == self.b5:
-			if self.userData[0][4] >= self.computerData[0][4]:
+			if self.userData[0][4] <= self.computerData[0][4]: # Footprint: Smaller = better
 				userWinsNow = 1
 			else:
 				userWinsNow = 0
 
 		if userWinsNow == 1:
 			self.iCard.source = self.computerPics[0]
-			Clock.schedule_once(self.showNewCard, 2.0)
+			Clock.schedule_once(self.showNewCard, 1.5)
 			self.labl.text = 'User wins!'
 			self.userData.append(self.userData[0])
 			self.userData.append(self.computerData[0])
@@ -145,7 +145,7 @@ class ProgramX(App):
 			self.computerPics = self.computerPics[1:]
 		else:
 			self.iCard.source = self.computerPics[0]
-			Clock.schedule_once(self.showNewCard, 2.0)
+			Clock.schedule_once(self.showNewCard, 1.5)
 			self.labl.text = 'Computer wins!'
 			self.computerData.append(self.computerData[0])
 			self.computerData.append(self.userData[0])
@@ -157,18 +157,22 @@ class ProgramX(App):
 			self.computerPics = self.computerPics[1:]
 
 		if len(self.userPics) == 0:
+			Clock.unschedule(self.showNewCard)
 			self.labl.text = 'Computer wins the game!'
+			# TODO button to restart the game
 			return -1
 		if len(self.computerPics) == 0:
+			Clock.unschedule(self.showNewCard)
 			self.labl.text = 'You win the game!'
+			# TODO button to restart the game
 			return 1
 
 		return 0
 
 	def showNewCard(self, *args):
 		if len(self.userPics) > 0:
-			self.labl.text = 'New card'
 			self.iCard.source = self.userPics[0]
+			self.labl.text = ''
 		return 0
 
 if __name__ == "__main__":
