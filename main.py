@@ -132,9 +132,9 @@ class ProgramX(App):
 				userWinsNow = 0
 
 		if userWinsNow == 1:
-			self.labl.text = 'User wins!'
 			self.iCard.source = self.computerPics[0]
-			#Clock.schedule_once(function, time)
+			Clock.schedule_once(self.showNewCard, 2.0)
+			self.labl.text = 'User wins!'
 			self.userData.append(self.userData[0])
 			self.userData.append(self.computerData[0])
 			self.userData = self.userData[1:]
@@ -144,9 +144,9 @@ class ProgramX(App):
 			self.userPics = self.userPics[1:]
 			self.computerPics = self.computerPics[1:]
 		else:
-			self.labl.text = 'Computer wins!'
 			self.iCard.source = self.computerPics[0]
-			#Clock.schedule_once(function, time)
+			Clock.schedule_once(self.showNewCard, 2.0)
+			self.labl.text = 'Computer wins!'
 			self.computerData.append(self.computerData[0])
 			self.computerData.append(self.userData[0])
 			self.userData = self.userData[1:]
@@ -163,11 +163,13 @@ class ProgramX(App):
 			self.labl.text = 'You win the game!'
 			return 1
 
-		self.iCard.source = self.userPics[0]
 		return 0
 
-	def useless(self, foo):
-		time.sleep(1)
+	def showNewCard(self, *args):
+		if len(self.userPics) > 0:
+			self.labl.text = 'New card'
+			self.iCard.source = self.userPics[0]
+		return 0
 
 if __name__ == "__main__":
 	ProgramX().run()
