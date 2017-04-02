@@ -1,0 +1,5 @@
+power=2640
+co2=19.8
+cost=1000
+employee=350
+footprint=50
